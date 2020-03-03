@@ -1,0 +1,27 @@
+FROM node:alpine
+
+ENV CHOKIDAR_USEPOLLING=true
+
+WORKDIR '/app'
+
+COPY package.json . 
+#COPY ./package.json ./
+RUN npm install --silent
+
+COPY . . 
+#COPY ./ ./
+
+CMD ["npm", "run" ,"start"]
+
+FROM node:alpine
+
+ENV CHOKIDAR_USEPOLLING=true
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "run", "start"]
